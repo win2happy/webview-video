@@ -69,18 +69,17 @@ jobs:
       - name: Build with bundle
         run: |
           flutter build windows --release
-          Copy-Item -Path "build\windows\runner\Release" -Destination "build\windows\Release" -Recurse -Force
 
       - name: Copy launcher script
         run: |
-          Copy-Item -Path "run.bat" -Destination "build\windows\runner\Release\" -Force
+          Copy-Item -Path "run.bat" -Destination "build\windows\x64\runner\Release\" -Force
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: webview_tv_player-windows-${{ github.run_number }}
           path: |
-            build/windows/runner/Release/
+            build/windows/x64/runner/Release/
             run.bat
           if-no-files-found: error
           retention-days: 30
