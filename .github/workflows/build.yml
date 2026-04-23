@@ -35,7 +35,9 @@ jobs:
         run: |
           if (!(Test-Path "windows\runner\main.cpp")) {
             Remove-Item -Recurse -Force windows -ErrorAction SilentlyContinue
-            flutter create --platforms=windows .
+            Move-Item -Path lib -Destination lib_backup
+            flutter create --platforms=windows --project-name=webview_tv_player .
+            Move-Item -Path lib_backup -Destination lib -Force
           }
 
       - name: Restore dependencies

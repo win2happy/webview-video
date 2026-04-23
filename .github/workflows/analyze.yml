@@ -29,4 +29,4 @@ jobs:
 
       - name: Format check
         run: |
-          flutter format --set-exit-if-changed lib/ test/
+          dart format --set-exit-if-changed lib/ test/

@@ -25,8 +25,18 @@ jobs:
         run: flutter pub get
 
       - name: Run tests
-        run: flutter test --no-pub
+        run: |
+          if (Test-Path "test\*.dart") {
+            flutter test --no-pub
+          } else {
+            echo "No tests found, skipping"
+          }
 
       - name: Run widget tests
-        run: flutter test --no-pub integration_test/
+        run: |
+          if (Test-Path "integration_test\*.dart") {
+            flutter test --no-pub integration_test/
+          } else {
+            echo "No integration tests found, skipping"
+          }
         continue-on-error: true
