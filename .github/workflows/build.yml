@@ -31,6 +31,13 @@ jobs:
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v2
 
+      - name: Create Windows platform
+        run: |
+          if (!(Test-Path "windows\runner\main.cpp")) {
+            Remove-Item -Recurse -Force windows -ErrorAction SilentlyContinue
+            flutter create --platforms=windows .
+          }
+
       - name: Restore dependencies
         run: flutter pub get
 

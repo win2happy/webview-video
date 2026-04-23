@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/tv_player_bloc.dart';
 import '../bloc/tv_player_event.dart';
 import '../bloc/tv_player_state.dart';
-import '../models/channel.dart';
 import '../widgets/webview_player.dart';
 import '../widgets/channel_list_widget.dart';
 import '../widgets/category_tab_bar.dart';
@@ -49,7 +48,6 @@ class _TvPlayerPageState extends State<TvPlayerPage> {
           bloc.add(const NavigateChannelEvent(1));
           break;
         case LogicalKeyboardKey.escape:
-        case LogicalKeyboardKey.back:
           if (bloc.state.isFullscreen) {
             bloc.add(const ToggleFullscreenEvent());
           }
