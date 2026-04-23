@@ -21,12 +21,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Clone config repository
-        env:
-          CONFIG_REPO: ${{ vars.CONFIG_REPO || 'MonkeyCodeTeam/config' }}
-        run: |
-          git clone --depth 1 https://github.com/$CONFIG_REPO.git config_temp 2>/dev/null || echo "Config repo not found, using defaults"
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:

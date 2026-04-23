@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:in_app_webview/in_app_webview.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import '../models/channel.dart';
 
 class WebViewPlayer extends StatefulWidget {
@@ -19,18 +19,14 @@ class WebViewPlayer extends StatefulWidget {
 }
 
 class _WebViewPlayerState extends State<WebViewPlayer> {
-  late InAppWebViewController _webViewController;
+  InAppWebViewController? _webViewController;
   bool _isLoading = true;
   double _loadProgress = 0;
 
   @override
   void dispose() {
-    _webViewController.dispose();
+    _webViewController?.dispose();
     super.dispose();
-  }
-
-  Future<void> _handleLoadError(InAppWebViewController controller, WebResourceError error) async {
-    widget.onError?.call();
   }
 
   @override
@@ -67,7 +63,9 @@ class _WebViewPlayerState extends State<WebViewPlayer> {
                     _isLoading = false;
                   });
                 },
-                onLoadError: _handleLoadError,
+                onReceivedError: (controller, request, error) {
+                  widget.onError?.call();
+                },
                 onProgressChanged: (controller, progress) {
                   setState(() {
                     _loadProgress = progress / 100;
