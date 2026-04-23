@@ -34,11 +34,23 @@ jobs:
       - name: Create Windows platform
         run: |
           if (!(Test-Path "windows\runner\main.cpp")) {
-            Remove-Item -Recurse -Force windows -ErrorAction SilentlyContinue
-            Move-Item -Path lib -Destination lib_backup
+            Write-Host "Creating Windows platform..."
+            Move-Item -Path lib -Destination lib_backup -Force
+            Move-Item -Path test -Destination test_backup -Force -ErrorAction SilentlyContinue
+            Move-Item -Path pubspec.yaml -Destination pubspec.yaml.bak -Force
             flutter create --platforms=windows --project-name=webview_tv_player .
             Move-Item -Path lib_backup -Destination lib -Force
+            Move-Item -Path test_backup -Destination test -Force -ErrorAction SilentlyContinue
+            Move-Item -Path pubspec.yaml.bak -Destination pubspec.yaml -Force
+            Write-Host "Windows platform created"
+          } else {
+            Write-Host "Windows platform already exists"
           }
+
+      - name: Verify lib content
+        run: |
+          Write-Host "lib/main.dart content:"
+          Get-Content lib/main.dart | Select-Object -First 10
 
       - name: Restore dependencies
         run: flutter pub get
@@ -63,12 +75,13 @@ jobs:
         run: flutter doctor
 
       - name: Build Windows release
-        run: flutter build windows --release --verbose
-        timeout-minutes: 30
-
-      - name: Build with bundle
         run: |
-          flutter build windows --release
+          if (Test-Path "build\windows") {
+            Remove-Item -Recurse -Force "build\windows" -ErrorAction SilentlyContinue
+          }
+          flutter pub get
+          flutter build windows --release --verbose
+        timeout-minutes: 30
 
       - name: Copy launcher script
         run: |
