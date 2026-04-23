@@ -29,4 +29,7 @@ jobs:
 
       - name: Format check
         run: |
-          dart format --set-exit-if-changed lib/ test/
+          dart format --set-exit-if-changed lib/
+          if [ -d "test" ] && [ "$(ls -A test/*.dart 2>/dev/null)" ]; then
+            dart format --set-exit-if-changed test/
+          fi

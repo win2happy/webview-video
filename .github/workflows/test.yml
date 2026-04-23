@@ -26,17 +26,17 @@ jobs:
 
       - name: Run tests
         run: |
-          if (Test-Path "test\*.dart") {
+          if ls test/*.dart 1> /dev/null 2>&1; then
             flutter test --no-pub
-          } else {
+          else
             echo "No tests found, skipping"
-          }
+          fi
 
       - name: Run widget tests
         run: |
-          if (Test-Path "integration_test\*.dart") {
+          if ls integration_test/*.dart 1> /dev/null 2>&1; then
             flutter test --no-pub integration_test/
-          } else {
+          else
             echo "No integration tests found, skipping"
-          }
+          fi
         continue-on-error: true
