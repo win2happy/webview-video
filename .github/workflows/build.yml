@@ -1,0 +1,108 @@
+name: Build Windows
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  flutter_version: '3.24.0'
+  pub_version: '3.24.0'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clone config repository
+        env:
+          CONFIG_REPO: ${{ vars.CONFIG_REPO || 'MonkeyCodeTeam/config' }}
+        run: |
+          git clone --depth 1 https://github.com/$CONFIG_REPO.git config_temp 2>/dev/null || echo "Config repo not found, using defaults"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.flutter_version }}
+          channel: 'stable'
+          architecture: x64
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore dependencies
+        run: flutter pub get
+
+      - name: Get dependencies checksum
+        id: deps-checksum
+        run: |
+          $hash = Get-FileHash -Algorithm SHA256 pubspec.lock
+          echo "checksum=$($hash.Hash)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.LOCALAPPDATA }}\Pub\Cache
+            ${{ env.HOME }}\.pub-cache
+          key: ${{ runner.os }}-deps-${{ steps.deps-checksum.outputs.checksum }}
+          restore-keys: |
+            ${{ runner.os }}-deps-
+
+      - name: Verify Flutter setup
+        run: flutter doctor
+
+      - name: Build Windows release
+        run: flutter build windows --release --verbose
+        timeout-minutes: 30
+
+      - name: Build with bundle
+        run: |
+          flutter build windows --release
+          Copy-Item -Path "build\windows\runner\Release" -Destination "build\windows\Release" -Recurse -Force
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: webview_tv_player-windows-${{ github.run_number }}
+          path: |
+            build/windows/runner/Release/*.exe
+            build/windows/runner/Release/*.dll
+            build/windows/runner/Release/resources/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload full build folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: webview_tv_player-windows-full-${{ github.run_number }}
+          path: build/windows/
+          if-no-files-found: warn
+          retention-days: 7
+
+  build-release:
+    needs: build-windows
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: artifacts/**/*.exe
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

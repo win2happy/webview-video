@@ -1,0 +1,193 @@
+{
+  "categories": [
+    {
+      "name": "CCTV",
+      "channels": [
+        {
+          "id": "cctv1",
+          "name": "CCTV-1 综合",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv1/"
+        },
+        {
+          "id": "cctv2",
+          "name": "CCTV-2 财经",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv2/"
+        },
+        {
+          "id": "cctv3",
+          "name": "CCTV-3 综艺",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv3/"
+        },
+        {
+          "id": "cctv4",
+          "name": "CCTV-4 中文国际",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv4/"
+        },
+        {
+          "id": "cctv5",
+          "name": "CCTV-5 体育",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv5/"
+        },
+        {
+          "id": "cctv6",
+          "name": "CCTV-6 电影",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv6/"
+        },
+        {
+          "id": "cctv7",
+          "name": "CCTV-7 国防军事",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv7/"
+        },
+        {
+          "id": "cctv8",
+          "name": "CCTV-8 电视剧",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv8/"
+        },
+        {
+          "id": "cctv9",
+          "name": "CCTV-9 纪录",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv9/"
+        },
+        {
+          "id": "cctv10",
+          "name": "CCTV-10 科教",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv10/"
+        },
+        {
+          "id": "cctv11",
+          "name": "CCTV-11 戏曲",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv11/"
+        },
+        {
+          "id": "cctv12",
+          "name": "CCTV-12 社会与法",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv12/"
+        },
+        {
+          "id": "cctv13",
+          "name": "CCTV-13 新闻",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv13/"
+        },
+        {
+          "id": "cctv14",
+          "name": "CCTV-14 少儿",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv14/"
+        },
+        {
+          "id": "cctv15",
+          "name": "CCTV-15 音乐",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv15/"
+        },
+        {
+          "id": "cctv16",
+          "name": "CCTV-16 奥林匹克",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv16/"
+        },
+        {
+          "id": "cctv17",
+          "name": "CCTV-17 农业农村",
+          "logo": "",
+          "url": "https://tv.cctv.com/live/cctv17/"
+        }
+      ]
+    },
+    {
+      "name": "Provincial TV",
+      "channels": [
+        {
+          "id": "hunan",
+          "name": "湖南卫视",
+          "logo": "",
+          "url": "https://tv.hunantv.com/"
+        },
+        {
+          "id": "zj",
+          "name": "浙江卫视",
+          "logo": "",
+          "url": "https://tv.zjtv.com/"
+        },
+        {
+          "id": "jh",
+          "name": "江苏卫视",
+          "logo": "",
+          "url": "https://tv.jstv.com/"
+        },
+        {
+          "id": "ah",
+          "name": "安徽卫视",
+          "logo": "",
+          "url": "https://tv.ahtv.com/"
+        },
+        {
+          "id": "gd",
+          "name": "广东卫视",
+          "logo": "",
+          "url": "https://tv.gdtv.com/"
+        },
+        {
+          "id": "bj",
+          "name": "北京卫视",
+          "logo": "",
+          "url": "https://tv.brtn.com/"
+        },
+        {
+          "id": "sh",
+          "name": "东方卫视",
+          "logo": "",
+          "url": "https://tv.shutcm.com/"
+        },
+        {
+          "id": "ln",
+          "name": "辽宁卫视",
+          "logo": "",
+          "url": "https://tv.lntv.com/"
+        },
+        {
+          "id": "sd",
+          "name": "山东卫视",
+          "logo": "",
+          "url": "https://v.iqilu.com/"
+        },
+        {
+          "id": "hb",
+          "name": "湖北卫视",
+          "logo": "",
+          "url": "https://tv.hbtv.com.cn/"
+        }
+      ]
+    },
+    {
+      "name": "Test Streams (M3U8)",
+      "channels": [
+        {
+          "id": "test_big_buck_bunny",
+          "name": "Big Buck Bunny (Test)",
+          "logo": "",
+          "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+        },
+        {
+          "id": "test_appple_tears",
+          "name": "Apple Tears (Test)",
+          "logo": "",
+          "url": "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8"
+        }
+      ]
+    }
+  ]
+}
